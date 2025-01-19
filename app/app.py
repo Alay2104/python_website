@@ -8,5 +8,6 @@ app.register_blueprint(views, url_prefix="/views")
 def home():
     return "This is the home page"
 
+
 if __name__== '__main__':
     app.run(debug=True,port=5000)
