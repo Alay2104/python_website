@@ -9,7 +9,7 @@
 <body>
   <div class="min-h-screen bg-background">
     <!-- Navigation -->
-    <nav class="border-b">
+    <nav class="border-b"> 
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
           <div class="flex space-x-8">
@@ -47,8 +47,7 @@
         {% for category in categories %}
         <button
           class="btn {{ 'btn-default' if active_filter == category['id'] else 'btn-outline' }} text-sm"
-          onclick="filterPortfolio('{{ category['id'] }}')"
-        >
+          onclick="filterPortfolio('{{category['id'] }}')">
           {{ category['label'] }}
         </button>
         {% endfor %}

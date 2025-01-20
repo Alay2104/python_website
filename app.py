@@ -1,10 +1,10 @@
 from flask import Flask,render_template
-from views import views
+#from views import views
 app = Flask(__name__)
-app.register_blueprint(views, url_prefix="/views")
+#app.register_blueprint(views, url_prefix="/views")
 
 @app.route("/")
-def portfolio():
+def home():
     categories = [
         {'id': 'all', 'label': 'Show all'},
         {'id': 'data-mining', 'label': 'Data mining'},
@@ -27,7 +27,6 @@ def portfolio():
             "category": "dashboard",
             "imageUrl": "https://your-image-url.com/image2.png",
         },
-        # Add more items here
     ]
 
     active_filter = 'all'
@@ -38,8 +37,6 @@ def portfolio():
         portfolio_items=portfolio_items,
         active_filter=active_filter,
     )
-def home():
-    return "This is the home page"
 
 if __name__== '__main__':
     app.run(debug=True,port=5000)
