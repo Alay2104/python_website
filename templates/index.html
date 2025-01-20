@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="min-h-screen bg-background">
+    <!-- Navigation -->
+    <nav class="border-b">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex space-x-8">
+            {% for item in ['HOME', 'INTRO', 'SERVICES', 'BLOG', 'WEBSITES', 'PORTFOLIO', 'TESTIMONIALS', 'CONTACT'] %}
+            <a
+              href="#{{ item.lower() }}"
+              class="inline-flex items-center px-1 pt-1 text-sm font-medium
+                {% if item == 'PORTFOLIO' %}
+                  text-primary border-b-2 border-primary
+                {% else %}
+                  text-muted-foreground hover:text-primary hover:border-b-2 hover:border-primary
+                {% endif %}"
+            >
+              {{ item }}
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="text-center">
+        <h1 class="text-4xl font-bold tracking-tight text-foreground sm:text-5xl mb-4">
+          PORTFOLIO
+        </h1>
+        <p class="text-xl text-muted-foreground mb-12">
+          A glimpse of the projects I've been working on
+        </p>
+      </div>
+
+      <!-- Filter Buttons -->
+      <div class="flex flex-wrap justify-center gap-2 mb-12">
+        {% for category in categories %}
+        <button
+          class="btn {{ 'btn-default' if active_filter == category['id'] else 'btn-outline' }} text-sm"
+          onclick="filterPortfolio('{{ category['id'] }}')"
+        >
+          {{ category['label'] }}
+        </button>
+        {% endfor %}
+      </div>
+
+      <!-- Portfolio Grid -->
+      <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for item in portfolio_items %}
+        <div class="group relative bg-card rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+          <div class="aspect-square relative">
+            <img
+              src="{{ item['imageUrl'] }}"
+              alt="{{ item['title'] }}"
+              class="object-cover transition-transform group-hover:scale-105 w-full h-full"
+            />
+            <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <h3 class="text-white text-xl font-semibold p-4 text-center">
+                {{ item['title'] }}
+              </h3>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </main>
+  </div>
+
+  <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
